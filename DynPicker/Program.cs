@@ -11,6 +11,7 @@ namespace DynPicker
         [STAThread]
         static void Main()
         {
+            //检查个锤子跨线程调用，冲突是不可能冲突的，这辈子都不可能冲突的
             Control.CheckForIllegalCrossThreadCalls = false;
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
