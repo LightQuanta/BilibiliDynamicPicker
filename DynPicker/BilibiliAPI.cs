@@ -136,6 +136,7 @@ namespace DynPicker
 
                 pages = count <= 20 ? 1 : count / 20 + 1;
 
+                //如果没有评论直接返回null
                 if (count == 0)
                 {
                     return null;
@@ -146,9 +147,10 @@ namespace DynPicker
                     //如果只有1页直接返回第一页内容
                     return GetReplyDic((JArray)j["data"]["replies"]);
                 }
+                //否则循环获取所有页数的评论
                 else
                 {
-                    //否则循环获取所有页数的评论
+                    //先读取第一页评论的内容
                     foreach (KeyValuePair<string, string> k in GetReplyDic((JArray)j["data"]["replies"]))
                     {
                         if (!users.ContainsKey(k.Key))
@@ -156,7 +158,7 @@ namespace DynPicker
                             users.Add(k.Key, k.Value);
                         }
                     }
-
+                    //再循环获取接下来几页评论的内容
                     for (int i = 2; i <= pages; i++)
                     {
                         j = JObject.Parse(GetReplyJson(id, i.ToString()));
@@ -167,6 +169,7 @@ namespace DynPicker
                                 users.Add(k.Key, k.Value);
                             }
                         }
+                        //防止rate limit
                         Thread.Sleep(50);
                     }
                 }
@@ -189,9 +192,9 @@ namespace DynPicker
             {
                 WebClient MyWebClient = new WebClient();
                 MyWebClient.Credentials = CredentialCache.DefaultCredentials;
-                Byte[] pageData = MyWebClient.DownloadData(url); //从指定网站下载数据
-                string pageHtml = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句    
-                                                                         //string pageHtml = Encoding.UTF8.GetString(pageData); //如果获取网站页面采用的是UTF-8，则使用这句
+                Byte[] pageData = MyWebClient.DownloadData(url);            //从指定网站下载数据
+                string pageHtml = Encoding.Default.GetString(pageData);     //如果获取网站页面采用的是GB2312，则使用这句    
+                                                                            //string pageHtml = Encoding.UTF8.GetString(pageData); //如果获取网站页面采用的是UTF-8，则使用这句
                 return pageHtml;
             }
             catch (WebException webEx)
@@ -253,7 +256,7 @@ namespace DynPicker
         /// <returns></returns>
         private static string GetReplyJson(string url, string page)
         {
-            string s = GetWebpage(url + "&pn=" + page);
+            string s = GetWebpage(url + "&pn=" + page);     //我会说我之前把pn写成page导致获取了8次第一页评论的内容吗（
             return s;
         }
     }

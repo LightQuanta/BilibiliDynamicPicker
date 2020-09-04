@@ -17,18 +17,19 @@ namespace DynPicker
             InitializeComponent();
             RepliedUser = new Dictionary<string, string>();
 
+            //是的动态id是写死在代码里的（
             DynId = "430814326783767162";
         }
 
         private void btnGet_Click(object sender, EventArgs e)
         {
+            //多线程处理避免卡住窗体
             Thread t=new Thread(new ThreadStart(GetUsers));
             t.Start();
         }
 
         private void GetUsers()
         {
-            
             btnGet.Text = "正在获取...";
             btnGet.Enabled = false;
             lstUsers.Items.Clear();
@@ -49,6 +50,7 @@ namespace DynPicker
 
         private void btnGet_MouseDown(object sender, MouseEventArgs e)
         {
+            //不知道为什么代码臭了起来（
             seed = e.X * 114 * e.Y * 514;
             seed -= 1919810;
             seed += DateTime.Now.Second * 7355608;
@@ -57,12 +59,13 @@ namespace DynPicker
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            if (lstUsers.Items.Count>0)
+            if (lstUsers.Items.Count >= 5)
             {
                 Thread t = new Thread(new ThreadStart(Sel));
                 t.Start();
             } else
             {
+                //5个人都不够还想抽奖？你在想peach
                 MessageBox.Show("请先获取用户！");
             }
         }
@@ -73,6 +76,8 @@ namespace DynPicker
             btnGet.Enabled = false;
 
             txtB.Text = "恭喜这5个B\r\n站用户";
+
+            //别问我为啥不用for，问就是懒
             Thread.Sleep(700);
             Random r = new Random(++seed);
             lstUsers.SelectedIndex = r.Next(0, lstUsers.Items.Count - 1);
