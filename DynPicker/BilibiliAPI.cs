@@ -18,6 +18,7 @@ namespace DynPicker
         {
             Dictionary<string, string> users = new Dictionary<string, string>();
 
+            //获取转发的API
             string link = "https://api.live.bilibili.com/dynamic_repost/v1/dynamic_repost/view_repost?dynamic_id=" + uid + "&offset=";
 
             int offset = 0;
