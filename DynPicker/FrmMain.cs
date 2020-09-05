@@ -134,7 +134,7 @@ namespace DynPicker
             r = new Random(seed);
             lstUsers.SelectedIndex = r.Next(0, lstUsers.Items.Count - 1);
             txtB.Text += "\r\n";
-            for (int i = 0; i < lstUsers.SelectedItem.ToString().Length - 1; i++)
+            for (int i = 0; i < lstUsers.SelectedItem.ToString().Length; i++)
             {
                 txtB.Text += lstUsers.SelectedItem.ToString()[i];
                 Thread.Sleep(50);
