@@ -21,6 +21,7 @@ namespace DynPicker
             //获取转发的API
             string link = "https://api.live.bilibili.com/dynamic_repost/v1/dynamic_repost/view_repost?dynamic_id=" + uid + "&offset=";
 
+            //获取转发的偏移量，每次获取后往后加20直到获取所有转发
             int offset = 0;
             string json = GetWebpage(link + offset.ToString());
             JObject j = JObject.Parse(json);
