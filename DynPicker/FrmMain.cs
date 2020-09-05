@@ -76,58 +76,63 @@ namespace DynPicker
             btnGet.Enabled = false;
 
             txtB.Text = "恭喜这5个B\r\n站用户";
+            string[] s = new string[4];
 
             //别问我为啥不用for，问就是懒
-            Thread.Sleep(700);
+            Thread.Sleep(300);
             Random r = new Random(++seed);
             lstUsers.SelectedIndex = r.Next(0, lstUsers.Items.Count - 1);
             txtB.Text += "\r\n";
+            s[0] = lstUsers.SelectedItem.ToString();
             for (int i=0;i< lstUsers.SelectedItem.ToString().Length;i++)
             {
                 txtB.Text += lstUsers.SelectedItem.ToString()[i];
                 Thread.Sleep(50);
             }
 
-            Thread.Sleep(700);
+            Thread.Sleep(300);
             lstUsers.Items.RemoveAt(lstUsers.SelectedIndex);
             seed *= 2;
             seed += 114;
             r = new Random(seed);
             lstUsers.SelectedIndex = r.Next(0, lstUsers.Items.Count - 1);
             txtB.Text += "\r\n";
+            s[1] = lstUsers.SelectedItem.ToString();
             for (int i = 0; i < lstUsers.SelectedItem.ToString().Length; i++)
             {
                 txtB.Text += lstUsers.SelectedItem.ToString()[i];
                 Thread.Sleep(50);
             }
 
-            Thread.Sleep(700);
+            Thread.Sleep(300);
             lstUsers.Items.RemoveAt(lstUsers.SelectedIndex);
             seed += 514;
             seed /= 114;
             r = new Random(seed);
             lstUsers.SelectedIndex = r.Next(0, lstUsers.Items.Count - 1);
             txtB.Text += "\r\n";
+            s[2] = lstUsers.SelectedItem.ToString();
             for (int i = 0; i < lstUsers.SelectedItem.ToString().Length; i++)
             {
                 txtB.Text += lstUsers.SelectedItem.ToString()[i];
                 Thread.Sleep(50);
             }
 
-            Thread.Sleep(700);
+            Thread.Sleep(300);
             lstUsers.Items.RemoveAt(lstUsers.SelectedIndex);
             seed *= DateTime.Now.Second;
             seed += 114514;
             r = new Random(seed);
             lstUsers.SelectedIndex = r.Next(0, lstUsers.Items.Count - 1);
             txtB.Text += "\r\n";
+            s[3] = lstUsers.SelectedItem.ToString();
             for (int i = 0; i < lstUsers.SelectedItem.ToString().Length; i++)
             {
                 txtB.Text += lstUsers.SelectedItem.ToString()[i];
                 Thread.Sleep(50);
             }
 
-            Thread.Sleep(700);
+            Thread.Sleep(300);
             lstUsers.Items.RemoveAt(lstUsers.SelectedIndex);
             seed += 1919810;
             seed -= DateTime.Now.Millisecond * 233;
@@ -139,7 +144,12 @@ namespace DynPicker
                 txtB.Text += lstUsers.SelectedItem.ToString()[i];
                 Thread.Sleep(50);
             }
+            lstUsers.Items.Add(s[0]);
+            lstUsers.Items.Add(s[1]);
+            lstUsers.Items.Add(s[2]);
+            lstUsers.Items.Add(s[3]);
 
+            btnSelect.Enabled = true;
             btnGet.Enabled = true;
         }
     }
