@@ -53,10 +53,10 @@
             this.lnkShow.AutoSize = true;
             this.lnkShow.Location = new System.Drawing.Point(12, 9);
             this.lnkShow.Name = "lnkShow";
-            this.lnkShow.Size = new System.Drawing.Size(302, 17);
+            this.lnkShow.Size = new System.Drawing.Size(365, 17);
             this.lnkShow.TabIndex = 2;
             this.lnkShow.TabStop = true;
-            this.lnkShow.Text = "动态链接 https://t.bilibili.com/430814326783767162";
+            this.lnkShow.Text = "项目地址 https://github.com/LightQuanta/BilibiliDynamicPicker";
             // 
             // label1
             // 
