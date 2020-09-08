@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.Pkcs;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -80,7 +81,7 @@ namespace DynPicker
 
             //别问我为啥不用for，问就是懒
             Thread.Sleep(300);
-            Random r = new Random(++seed);
+            Random r = new Random(++seed + (new Random()).Next());
             lstUsers.SelectedIndex = r.Next(0, lstUsers.Items.Count - 1);
             txtB.Text += "\r\n";
             s[0] = lstUsers.SelectedItem.ToString();
@@ -93,6 +94,8 @@ namespace DynPicker
             Thread.Sleep(300);
             lstUsers.Items.RemoveAt(lstUsers.SelectedIndex);
             seed *= 2;
+            Thread.Sleep(10);
+            seed += (new Random()).Next(1000000, 100000000);
             seed += 114;
             r = new Random(seed);
             lstUsers.SelectedIndex = r.Next(0, lstUsers.Items.Count - 1);
@@ -107,7 +110,7 @@ namespace DynPicker
             Thread.Sleep(300);
             lstUsers.Items.RemoveAt(lstUsers.SelectedIndex);
             seed += 514;
-            seed /= 114;
+            seed /= (new Random()).Next(10, 100);
             r = new Random(seed);
             lstUsers.SelectedIndex = r.Next(0, lstUsers.Items.Count - 1);
             txtB.Text += "\r\n";
@@ -121,6 +124,7 @@ namespace DynPicker
             Thread.Sleep(300);
             lstUsers.Items.RemoveAt(lstUsers.SelectedIndex);
             seed *= DateTime.Now.Second;
+            seed -= DateTime.Now.Millisecond;
             seed += 114514;
             r = new Random(seed);
             lstUsers.SelectedIndex = r.Next(0, lstUsers.Items.Count - 1);

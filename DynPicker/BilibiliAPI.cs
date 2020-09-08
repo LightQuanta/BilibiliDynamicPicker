@@ -59,13 +59,16 @@ namespace DynPicker
                             Thread.Sleep(50);
                             string ss = GetWebpage(link + offset.ToString());
                             j = JObject.Parse(ss);
-                            foreach (JObject rep in j["data"]["comments"].Children())
+                            try
                             {
-                                if (!users.ContainsKey(rep["uname"].ToString()))
+                                foreach (JObject rep in j["data"]["comments"].Children())
                                 {
-                                    users.Add(rep["uname"].ToString(), rep["uid"].ToString());
+                                    if (!users.ContainsKey(rep["uname"].ToString()))
+                                    {
+                                        users.Add(rep["uname"].ToString(), rep["uid"].ToString());
+                                    }
                                 }
-                            }
+                            } catch (Exception) { }
                         }
                         return users;
                     }
